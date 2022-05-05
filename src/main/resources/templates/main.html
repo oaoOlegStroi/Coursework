@@ -5,6 +5,20 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'Привет, ' + ${title} + '!'" />
+<p th:text="'Привет, это ' + ${title} + '!'" />
+
+<div th:each="user : ${users}">
+  <table>
+    <thead>
+    <tr>
+      <td th:text ="${user.id}"></td>
+      <td th:text ="${user.FIO}"></td>
+      <td th:text ="${user.start_time}"></td>
+      <td th:text ="${user.end_time}"></td>
+    </tr>
+    </thead>
+  </table>
+</div>
+
 </body>
 </html>
