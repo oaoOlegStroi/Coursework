@@ -1,26 +1,32 @@
 package com.example.demo.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class controlUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String FIO;
-
-    private Timestamp start_time;
-
-    private Timestamp end_time;
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime start_time = LocalDateTime.now();
+    private LocalDateTime end_time;
+    private boolean isTimeEnd;
     public Long getId() {
         return id;
     }
+
+    public boolean isTimeEnd() {
+        return isTimeEnd;
+    }
+
+    public void setIsTimeEnd(boolean isTimeEnd){ this.isTimeEnd = isTimeEnd;}
 
     public void setId(Long id) {
         this.id = id;
@@ -34,20 +40,37 @@ public class controlUser {
         this.FIO = FIO;
     }
 
-    public Timestamp getStart_time() {
+    public LocalDateTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Timestamp start_time) {
+    public void setStart_time(LocalDateTime start_time) {
         this.start_time = start_time;
     }
 
-    public Timestamp getEnd_time() {
+    public LocalDateTime getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Timestamp end_time) {
+    public void setEnd_time(LocalDateTime end_time) {
         this.end_time = end_time;
     }
 
+    public void setTimeEnd(boolean timeEnd) {
+        isTimeEnd = timeEnd;
+    }
+
+    public controlUser(String FIO, LocalDateTime end_time) {
+        this.FIO = FIO;
+        this.end_time = end_time;
+    }
+
+    public controlUser(String FIO, LocalDateTime start_time, LocalDateTime end_time) {
+        this.FIO = FIO;
+        this.start_time = start_time;
+        this.end_time = end_time;
+    }
+
+    public controlUser() {
+    }
 }
