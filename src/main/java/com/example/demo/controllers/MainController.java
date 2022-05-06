@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 
-import static java.time.temporal.ChronoUnit.HOURS;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 @Controller
@@ -47,22 +46,27 @@ public class MainController {
 
     @PostMapping("/updateTable")
     public String updateTable(Model model) {
-        long el = 30;
-        controlUser user = controlUserRepository.findById(el).orElseThrow();
-        LocalDateTime tempDate = LocalDateTime.now();
-        LocalDateTime endDate = user.getEnd_time();
-        System.out.println(tempDate);
-        System.out.println(endDate);
+        long count = controlUserRepository.count();
+        System.out.println(count);
+        for (long i = 1; i <= count; i++)
+        {
+            controlUser user = controlUserRepository.findById(i).orElseThrow();
+            LocalDateTime tempDate = LocalDateTime.now();
+            LocalDateTime endDate = user.getEnd_time();
+            System.out.println(tempDate);
+            System.out.println(endDate);
 
-        if(tempDate.truncatedTo(MINUTES)
-                .isBefore(endDate.truncatedTo(MINUTES)))
-        {
-            //Проверка прошла успешно, дата начала раньше чем дата окончания
-        }
-        else
-        {
-            user.setIsTimeEnd(true);
-            controlUserRepository.save(user);
+            if(tempDate.truncatedTo(MINUTES)
+                    .isBefore(endDate.truncatedTo(MINUTES)))
+            {
+                System.out.println("True");
+                //Проверка прошла успешно, дата начала раньше чем дата окончания
+            }
+            else
+            {
+                user.setIsTimeEnd(true);
+                controlUserRepository.save(user);
+            }
         }
 
         return "redirect:/";
