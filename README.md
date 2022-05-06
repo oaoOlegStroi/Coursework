@@ -17,19 +17,19 @@
 
 Интерфейс системы управления посещаемости батутного центра:
 1. Таблица с внесенными данными из базы данных:
-![alt text](https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/tableBefore.png)
+![alt text](https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/tableBefore.png)
 
 2. Содержание базы данных:
-![alt text](https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/databaseBefore.png)
+![alt text](https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/databaseBefore.png)
 
 3. При нажатии на кпопку обновить таблицу происходит переадресация со следующей информацией:
-<p align="center"><img src="https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/updateTable.png"></p>
+<p align="center"><img src="https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/updateTable.png"></p>
 
 4. Таблица после выполнения POST запроса и методов:
-![alt text](https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/tableAfter.png)
+![alt text](https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/tableAfter.png)
 
 5. Изменения, которые произошли в базе данных:
-![alt text](https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/databaseAfter.png)
+![alt text](https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/databaseAfter.png)
 
 6. Форма добавления клиента:
-<p align="center"><img src="https://github.com/oaoOlegStroi/Coursework/blob/develop/screenshots/addUser.png"></p>
+<p align="center"><img src="https://github.com/oaoOlegStroi/Coursework/blob/main/screenshots/addUser.png"></p>
