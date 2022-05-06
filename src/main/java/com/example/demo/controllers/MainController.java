@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
+
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 @Controller
 public class MainController {
@@ -22,18 +23,49 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("title", "Батутный центр");
+        model.addAttribute("title", "Система управления посещаемости батутного центра");
         Iterable<controlUser> users = controlUserRepository.findAll();
         model.addAttribute("users", users);
         return "main";
     }
 
-    @PostMapping
+    @GetMapping("/addUser")
+    public String addUserPage(Model model) {
+        return "addUser";
+    }
+    @PostMapping("/addUser")
     public String addUser(@RequestParam String username, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateEnd, Model model) {
-        LocalDateTime dateStart = LocalDateTime.now();
-        controlUser user = new controlUser(username, dateStart, dateEnd);
+        controlUser user = new controlUser(username, dateEnd);
         controlUserRepository.save(user);
-        return "main";
+        return "redirect:/";
+    }
+
+    @GetMapping("/updateTable")
+    public String updateTablePage(Model model) {
+        return "updateTable";
+    }
+
+    @PostMapping("/updateTable")
+    public String updateTable(Model model) {
+        long el = 30;
+        controlUser user = controlUserRepository.findById(el).orElseThrow();
+        LocalDateTime tempDate = LocalDateTime.now();
+        LocalDateTime endDate = user.getEnd_time();
+        System.out.println(tempDate);
+        System.out.println(endDate);
+
+        if(tempDate.truncatedTo(MINUTES)
+                .isBefore(endDate.truncatedTo(MINUTES)))
+        {
+            //Проверка прошла успешно, дата начала раньше чем дата окончания
+        }
+        else
+        {
+            user.setIsTimeEnd(true);
+            controlUserRepository.save(user);
+        }
+
+        return "redirect:/";
     }
 
 }
