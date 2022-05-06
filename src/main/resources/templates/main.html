@@ -7,16 +7,14 @@
 </head>
 <body>
 <div class="container">
-  <h1 class="d-flex justify-content-center" th:text="'Привет, это ' + ${title} + '!'" />
-  <div class="row">
-    <div class="col">
-      <div>
+  <h1 class="d-flex justify-content-center" th:text="${title}" />
         <table class="table">
           <thead>
           <tr>
             <th scope="col">Имя</th>
             <th scope="col">Дата начала</th>
             <th scope="col">Дата окончания</th>
+            <th scope="col">Состояние</th>
           </tr>
           </thead>
           <tbody th:each="user : ${users}">
@@ -24,28 +22,17 @@
             <td th:text ="${user.FIO}"></td>
             <td th:text ="${user.start_time}"></td>
             <td th:text ="${user.end_time}"></td>
+            <div th:if="${user.isTimeEnd}">
+              <td class="text-danger">Время клиента закончилось!</td>
+            </div>
+            <div th:unless="${user.isTimeEnd}">
+              <td class="text-success">Время клиента активно</td>
+            </div>
           </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    <div class="col">
-      <h3 class="text-center">Добавление клиента</h3>
-      <div class="d-flex justify-content-center">
-        <form method="post">
-          <input type="text" name="username" placeholder="ФИО Клиента" class="form-control" required><br>
-          <input type="datetime-local" name="dateEnd" placeholder="Время окончания" class="form-control" required><br>
-          <input hidden type="date" pattern="yyyy-MM-dd"><br>
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Добавить клиента</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
+  <a class="d-flex justify-content-center mb-3" href="/updateTable">Обновить таблицу</a>
+  <a class="d-flex justify-content-center" href="/addUser">Добавить пользователя</a>
 </div>
-
-
 </body>
 </html>
