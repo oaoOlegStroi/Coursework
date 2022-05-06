@@ -6,12 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 @Entity
 public class controlUser {
@@ -19,12 +14,19 @@ public class controlUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String FIO;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) private LocalDateTime start_time = LocalDateTime.now();
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime start_time = LocalDateTime.now();
     private LocalDateTime end_time;
     private boolean isTimeEnd;
     public Long getId() {
         return id;
     }
+
+    public boolean isTimeEnd() {
+        return isTimeEnd;
+    }
+
+    public void setIsTimeEnd(boolean isTimeEnd){ this.isTimeEnd = isTimeEnd;}
 
     public void setId(Long id) {
         this.id = id;
@@ -52,10 +54,6 @@ public class controlUser {
 
     public void setEnd_time(LocalDateTime end_time) {
         this.end_time = end_time;
-    }
-
-    public boolean isTimeEnd() {
-        return isTimeEnd;
     }
 
     public void setTimeEnd(boolean timeEnd) {
